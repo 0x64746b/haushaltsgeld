@@ -1,0 +1,19 @@
+{
+    "name": "GFS6",
+    "short_name": "GFS6",
+    "icons": [
+        {
+            "src": "/static/imgs/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/imgs/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#383838",
+    "background_color": "#383838",
+    "display": "standalone"
+}
