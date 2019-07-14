@@ -4,7 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
+Flask = "*"
+Flask-SQLAlchemy = "*"
+SQLAlchemy = "*"
+pytz = "*"
+WTForms = "*"
+Flask-WTF = "*"
+wtforms-alchemy = "*"
 
 [dev-packages]
 
