@@ -2,5 +2,20 @@
 
 {% block body %}
 <h1>These are the recorded expenses</h1>
-<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+<table>
+    <th>
+        <td>Time</td>
+        <td>Amount</td>
+        <td>Store</td>
+        <td>User</td>
+    </th>
+    {% for expense in expenses %}
+    <tr>
+        <td>{{ expense.timestamp }}</td>
+        <td>{{ expense.amount }}</td>
+        <td>{{ expense.store }}</td>
+        <td>{{ expense.user.username }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}

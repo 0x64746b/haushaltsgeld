@@ -27,4 +27,4 @@ def add_expense():
 
 @expenses.route('/list')
 def list_expenses():
-    return render_template('list.html')
+    return render_template('list.html', expenses=Expense.query.all())
