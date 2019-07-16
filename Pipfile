@@ -8,9 +8,7 @@ Flask = "*"
 Flask-SQLAlchemy = "*"
 SQLAlchemy = "*"
 pytz = "*"
-WTForms = "*"
-Flask-WTF = "*"
-wtforms-alchemy = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

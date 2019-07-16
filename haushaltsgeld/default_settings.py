@@ -4,6 +4,8 @@ from os import environ
 
 """Set Flask configuration vars from .env file."""
 
+SECRET_KEY = environ.get('SECRET_KEY')
+
 # Database
 SQLALCHEMY_DATABASE_URI = environ.get(
     'SQLALCHEMY_DATABASE_URI',
