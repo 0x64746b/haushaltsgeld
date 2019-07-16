@@ -19,6 +19,9 @@ class Stores(Enum):
     budni = 5
     other = 6
 
+    def __str__(self):
+        return self.name
+
 
 class User(db.Model):
     __tablename__ = 'users'
