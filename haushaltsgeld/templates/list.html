@@ -1,21 +1,26 @@
 {% extends "base.html" %}
 
 {% block body %}
-<h1>These are the recorded expenses</h1>
-<table>
-    <th>
-        <td>Time</td>
-        <td>Amount</td>
-        <td>Store</td>
-        <td>User</td>
-    </th>
-    {% for expense in expenses %}
+<h1 class="mb-4">These are the recorded expenses</h1>
+<table class="table">
+  <thead>
     <tr>
-        <td>{{ expense.timestamp }}</td>
-        <td>{{ expense.amount }}</td>
-        <td>{{ expense.store }}</td>
-        <td>{{ expense.user.username }}</td>
+      <th>Time</th>
+      <th>Amount</th>
+      <th>Store</th>
+      <th>User</th>
     </tr>
-    {% endfor %}
+  </thead>
+  <tbody>
+  {% for expense in expenses %}
+    <tr>
+      <td>{{ expense.timestamp.strftime('%Y-%m-%d') }}</td>
+      <td>{{ expense.amount | round(2) }}</td>
+      <td>{{ expense.store | title }}</td>
+      <td>{{ expense.user.username }}</td>
+    </tr>
+  {% endfor %}
+
+  </tbody>
 </table>
 {% endblock %}
