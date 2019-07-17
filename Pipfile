@@ -9,6 +9,7 @@ Flask-SQLAlchemy = "*"
 SQLAlchemy = "*"
 pytz = "*"
 flask-wtf = "*"
+flask-login = "*"
 
 [dev-packages]
 ipython = "*"
