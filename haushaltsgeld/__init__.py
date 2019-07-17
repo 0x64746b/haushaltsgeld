@@ -23,7 +23,7 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
-    from .views import expenses
+    from .expenses.views import expenses
     app.register_blueprint(expenses)
 
     return app

@@ -1,12 +1,12 @@
 # coding: utf-8
 
-from flask import Blueprint, redirect, render_template, request, url_for
+from flask import Blueprint, redirect, render_template, url_for
 from flask_login import login_required
 
-from haushaltsgeld.forms import ExpenseForm
-from haushaltsgeld.models import Expense, User, db
+from .forms import ExpenseForm
+from .models import Expense, User, db
 
-expenses = Blueprint('expenses', __name__)
+expenses = Blueprint('expenses', __name__, template_folder='./templates')
 
 
 @expenses.route('/', methods=['GET', 'POST'])
@@ -26,6 +26,7 @@ def add_expense():
         return redirect(url_for('expenses.list_expenses'))
 
     return render_template('add.html', form=form)
+
 
 @expenses.route('/list')
 @login_required

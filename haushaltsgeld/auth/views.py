@@ -1,17 +1,17 @@
 # coding: utf-8
 
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, template_folder='./templates')
 
 
 @auth.route('/login')
 def login():
-    return 'Welcome'
+    return render_template('login.html')
 
 
 @auth.route('/logout')
 def logout():
-    return 'Goodbye'
+    return render_template('logout.html')
 

@@ -5,7 +5,7 @@ from wtforms import DecimalField, SelectField, SubmitField
 from wtforms.validators import InputRequired
 from wtforms.widgets.html5 import NumberInput
 
-from haushaltsgeld.models import Stores
+from .models import Stores
 
 
 class ExpenseForm(FlaskForm):
