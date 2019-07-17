@@ -3,8 +3,8 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from .. import db
 from . import login_manager
-from haushaltsgeld import db
 
 
 @login_manager.user_loader

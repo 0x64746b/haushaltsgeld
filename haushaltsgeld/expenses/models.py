@@ -5,8 +5,8 @@ from enum import Enum
 
 import pytz
 
-from haushaltsgeld import db
-from haushaltsgeld.auth.models import User
+from .. import db
+from ..auth.models import User
 
 
 class Stores(Enum):
