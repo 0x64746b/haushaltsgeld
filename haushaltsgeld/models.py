@@ -5,7 +5,7 @@ from enum import Enum
 
 import pytz
 from flask_sqlalchemy import SQLAlchemy
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -25,9 +25,27 @@ class Stores(Enum):
 
 class User(db.Model):
     __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True)
+    username = db.Column(db.String(16), unique=True, nullable=False)
+    password_hash = db.Column(db.String(200), nullable=False)
+
+    def __init__(self, **kwargs):
+        try:
+            kwargs['password_hash'] = self._hash_password(kwargs.pop('password'))
+        except KeyError:
+            pass
+        super().__init__(**kwargs)
+
+    @staticmethod
+    def _hash_password(password: str) -> str:
+        return generate_password_hash(password)
+
+    def set_password(self, password: str) -> None:
+        self.password_hash = self._hash_password(password)
+
+    def is_correct_password(self, candidate: str) -> bool:
+        return check_password_hash(self.password_hash, candidate)
 
     def __repr__(self):
         return f'<User {self.username}>'
