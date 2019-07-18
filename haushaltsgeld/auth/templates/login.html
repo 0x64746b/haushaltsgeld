@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Login page for Haushaltsgeld tracker">
+    <meta name="description" content="Log into your housekeeping money tracker">
     <meta name="author" content="dtk">
     <link rel="icon" href="/static/imgs/icons/favicon.ico">  <!-- TODO: Inject from settings -->
 
@@ -18,20 +18,34 @@
     <link href="/auth/static/css/login.css" rel="stylesheet">
   </head>
 
-  <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="/static/imgs/hawk.png" alt="" width="72" height="72">  <!-- TODO: Inject from settings -->
-      <!--h1 class="h3 mb-3 font-weight-normal">Please sign in</h1-->
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-      <!--div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-      </div-->
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-    </form>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+          <div class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Sign In</h5>
+              <form class="form-signin">
+                <div class="form-label-group">
+                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                  <label for="inputEmail">Email address</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                  <label for="inputPassword">Password</label>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-3">
+                  <input type="checkbox" class="custom-control-input" id="customCheck1">
+                  <label class="custom-control-label" for="customCheck1">Remember password</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
