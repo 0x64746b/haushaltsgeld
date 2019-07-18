@@ -8,7 +8,13 @@ from .. import auth
 from ..auth.models import User
 
 
-expenses = Blueprint('expenses', __name__, template_folder='templates')
+expenses = Blueprint(
+    name='expenses',
+    import_name=__name__,
+    template_folder='templates',
+    static_folder='static',
+    static_url_path='/expenses/static'
+)
 _db = auth.get_database()
 
 
