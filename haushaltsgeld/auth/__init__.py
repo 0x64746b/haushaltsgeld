@@ -5,7 +5,13 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 
-auth = Blueprint('auth', __name__, template_folder='./templates')
+auth = Blueprint(
+    'auth',
+    import_name=__name__,
+    template_folder='templates',
+    static_folder='static',
+    static_url_path='/auth/static'
+)
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
