@@ -1,12 +1,11 @@
 # coding: utf-8
 
-from flask import Blueprint, redirect, render_template, url_for
+from flask import redirect, render_template, url_for
 from flask_login import login_required
 
+from . import expenses
 from .forms import ExpenseForm
 from .models import Expense, User, db
-
-expenses = Blueprint('expenses', __name__, template_folder='./templates')
 
 
 @expenses.route('/', methods=['GET', 'POST'])

@@ -1,9 +1,8 @@
 # coding: utf-8
 
-from flask import Blueprint, render_template
+from flask import render_template
 
-
-auth = Blueprint('auth', __name__, template_folder='./templates')
+from . import auth
 
 
 @auth.route('/login')
