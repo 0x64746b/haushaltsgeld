@@ -5,8 +5,7 @@ from enum import Enum
 
 import pytz
 
-# This blueprint depends on the `auth` blueprint
-from ..auth.models import User, db
+from . import User, db
 
 
 class Stores(Enum):

@@ -10,7 +10,8 @@ def create_app():
 
     # Use the expenses blueprint to build this app.
     # It will take care of its own dependencies
-    from .expenses.models import db
+    from . import expenses
+    db = expenses.get_database()
     db.init_app(app)
     db.create_all(app=app)
 

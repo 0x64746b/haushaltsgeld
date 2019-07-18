@@ -11,3 +11,9 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
 db = SQLAlchemy()
+
+
+def get_database():
+    # Register models on DB
+    from . import models
+    return db
