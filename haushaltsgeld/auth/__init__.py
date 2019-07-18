@@ -10,10 +10,10 @@ auth = Blueprint('auth', __name__, template_folder='./templates')
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
-db = SQLAlchemy()
+_db = SQLAlchemy()
 
 
 def get_database():
     # Register models on DB
     from . import models
-    return db
+    return _db

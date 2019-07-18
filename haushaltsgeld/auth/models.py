@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-from . import db, login_manager
+from . import _db, login_manager
 
 
 @login_manager.user_loader
@@ -12,12 +12,12 @@ def resolve_user(user_id):
     return User.query.filter_by(username=user_id).one_or_none()
 
 
-class User(UserMixin, db.Model):
+class User(UserMixin, _db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(16), unique=True, nullable=False, index=True)
-    password_hash = db.Column(db.String(200), nullable=False)
+    id = _db.Column(_db.Integer, primary_key=True)
+    username = _db.Column(_db.String(16), unique=True, nullable=False, index=True)
+    password_hash = _db.Column(_db.String(200), nullable=False)
 
     def __init__(self, **kwargs):
         try:

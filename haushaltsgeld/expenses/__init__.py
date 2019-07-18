@@ -9,10 +9,10 @@ from ..auth.models import User
 
 
 expenses = Blueprint('expenses', __name__, template_folder='templates')
-db = auth.get_database()
+_db = auth.get_database()
 
 
 def get_database():
     # Register models on DB
     from . import models
-    return db
+    return _db

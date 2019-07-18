@@ -5,7 +5,7 @@ from enum import Enum
 
 import pytz
 
-from . import User, db
+from . import User, _db
 
 
 class Stores(Enum):
@@ -21,19 +21,19 @@ class Stores(Enum):
         return self.name
 
 
-class Expense(db.Model):
+class Expense(_db.Model):
     __tablename__ = 'expenses'
 
-    id = db.Column(db.Integer, primary_key=True)
-    timestamp = db.Column(
-        db.DateTime(timezone=True),
+    id = _db.Column(_db.Integer, primary_key=True)
+    timestamp = _db.Column(
+        _db.DateTime(timezone=True),
         nullable=False,
         default=lambda: datetime.now(pytz.utc),
     )
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=False)
-    user = db.relationship(User, backref=db.backref('expenses'), lazy=True)
-    amount = db.Column(db.Float(precision=2, asdecimal=True), nullable=False)
-    store = db.Column(db.Enum(Stores), nullable=False)
+    user_id = _db.Column(_db.Integer, _db.ForeignKey(User.id), nullable=False)
+    user = _db.relationship(User, backref=_db.backref('expenses'), lazy=True)
+    amount = _db.Column(_db.Float(precision=2, asdecimal=True), nullable=False)
+    store = _db.Column(_db.Enum(Stores), nullable=False)
 
     def __repr__(self):
         return f'<Expense {self.amount}>'
