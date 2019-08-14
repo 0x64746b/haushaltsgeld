@@ -56,10 +56,10 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item {% if active_page == 'list' %}active{% endif %}">
-            <a class="nav-link" href="/list">List</a>
+            <a class="nav-link" href="/list">List<span class="sr-only">list expenses</span></a>
           </li>
           <li class="nav-item {% if active_page == 'add' %}active{% endif %}">
-            <a class="nav-link" href="/">Add<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Add<span class="sr-only">add new expense</span></a>
           </li>
           <!--li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -73,10 +73,11 @@
             </div>
           </li-->
         </ul>
-        <!--form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form-->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/logout">Logout<span class="sr-only">log out</span></a>
+          </li>
+        </ul>
       </div>
     </nav>
 
