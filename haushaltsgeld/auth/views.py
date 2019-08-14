@@ -14,10 +14,8 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = resolve_user(form.username.data)
-        if user and user.is_correct_password(form.password.data):
-            login_user(user)
-            return redirect(current_app.config['INDEX_PAGE'])
+        login_user(resolve_user(form.username.data))  # The form validation checked the credentials
+        return redirect(current_app.config['INDEX_PAGE'])
 
     return render_template('login.html', form=form)
 

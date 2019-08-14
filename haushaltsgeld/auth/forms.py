@@ -20,3 +20,8 @@ class LoginForm(FlaskForm):
         validators=[InputRequired()]
     )
     submit = SubmitField('Sign In')
+
+    def validate_password(self, field):
+        user = resolve_user(self.username.data)
+        if not user or not user.is_correct_password(self.password.data):
+            raise ValidationError(self.INVALID_CREDENTIALS_MSG)
