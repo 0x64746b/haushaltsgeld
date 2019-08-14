@@ -15,5 +15,3 @@ SQLALCHEMY_TRACK_MODIFICATIONS = environ.get(
     'SQLALCHEMY_TRACK_MODIFICATIONS',
     False,
 )
-
-INDEX_PAGE = environ.get('INDEX_PAGE', '/')

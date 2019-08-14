@@ -10,6 +10,7 @@ SQLAlchemy = "*"
 pytz = "*"
 flask-wtf = "*"
 flask-login = "*"
+is-safe-url = "*"
 
 [dev-packages]
 ipython = "*"
