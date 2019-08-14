@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from flask import current_app, render_template
+from flask import current_app, render_template, flash, url_for
 from flask_login import login_user, logout_user
 from werkzeug.utils import redirect
 
@@ -22,5 +22,6 @@ def login():
 @auth.route('/logout')
 def logout():
     logout_user()
-    return render_template('logout.html')
+    flash('You\'ve been successfully logged out', category='success')
+    return redirect(url_for('auth.login'))
 
