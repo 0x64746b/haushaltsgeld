@@ -1,7 +1,7 @@
 # coding: utf-8
 
 from flask import redirect, render_template, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from . import expenses
 from .forms import ExpenseForm
@@ -16,7 +16,7 @@ def add_expense():
     if form.validate_on_submit():
         _db.session.add(
             Expense(
-                user=User.query.first(),  # TODO: Use user from session
+                user=current_user,
                 amount=form.amount.data,
                 store=form.store.data
             )
