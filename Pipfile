@@ -11,6 +11,7 @@ pytz = "*"
 flask-wtf = "*"
 flask-login = "*"
 is-safe-url = "*"
+uwsgi = "*"
 
 [dev-packages]
 ipython = "*"
