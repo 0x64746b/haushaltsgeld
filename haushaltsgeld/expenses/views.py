@@ -14,15 +14,12 @@ def add_expense():
     form = ExpenseForm()
 
     if form.validate_on_submit():
-        _db.session.add(
-            Expense(
-                user=current_user,
-                amount=form.amount.data,
-                store=form.store.data,
-                date=form.date.data,
-            )
-        )
+        expense = Expense(user=current_user)
+        form.populate_obj(expense)
+
+        _db.session.add(expense)
         _db.session.commit()
+
         return redirect(url_for('expenses.list_expenses'))
 
     return render_template('add.html', form=form)
@@ -35,12 +32,9 @@ def edit_expense(id):
     form = ExpenseForm(obj=expense)
 
     if form.validate_on_submit():
-        expense.amount = form.amount.data
-        expense.store = form.store.data
-        expense.date = form.date.data
-
-        _db.session.add(expense)
+        form.populate_obj(expense)
         _db.session.commit()
+
         return redirect(url_for('expenses.list_expenses'))
 
     return render_template('add.html', form=form)
