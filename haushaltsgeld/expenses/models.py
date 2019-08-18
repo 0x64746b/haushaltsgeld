@@ -26,7 +26,7 @@ class Expense(_db.Model):
     date = _db.Column(
         _db.Date(),
         nullable=False,
-        default=lambda: date.today()
+        default=date.today
     )
     user_id = _db.Column(_db.Integer, _db.ForeignKey(User.id), nullable=False)
     user = _db.relationship(User, backref=_db.backref('expenses'), lazy=True)

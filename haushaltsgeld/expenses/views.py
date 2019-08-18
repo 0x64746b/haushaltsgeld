@@ -1,11 +1,13 @@
 # coding: utf-8
 
+from datetime import date
+
 from flask import redirect, render_template, url_for
 from flask_login import login_required, current_user
 
 from . import expenses
 from .forms import ExpenseForm
-from .models import Expense, User, _db
+from .models import Expense, _db
 
 
 @expenses.route('/', methods=['GET', 'POST'])
@@ -18,13 +20,14 @@ def add_expense():
             Expense(
                 user=current_user,
                 amount=form.amount.data,
-                store=form.store.data
+                store=form.store.data,
+                date=form.date.data,
             )
         )
         _db.session.commit()
         return redirect(url_for('expenses.list_expenses'))
 
-    return render_template('add.html', form=form)
+    return render_template('add.html', form=form, today=date.today())
 
 
 @expenses.route('/list')
