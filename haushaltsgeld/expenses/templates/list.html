@@ -6,7 +6,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Time</th>
+      <th>Date</th>
       <th>Amount</th>
       <th>Store</th>
       <th>User</th>
@@ -15,7 +15,7 @@
   <tbody>
   {% for expense in expenses %}
     <tr>
-      <td>{{ expense.timestamp.strftime('%Y-%m-%d') }}</td>
+      <td>{{ expense.date }}</td>
       <td>{{ expense.amount | round(2) }}</td>
       <td>{{ expense.store | title }}</td>
       <td>{{ expense.user.username }}</td>

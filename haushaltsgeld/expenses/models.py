@@ -1,9 +1,7 @@
 # coding: utf-8
 
-from datetime import datetime
+from datetime import date
 from enum import Enum
-
-import pytz
 
 from . import User, _db
 
@@ -25,10 +23,10 @@ class Expense(_db.Model):
     __tablename__ = 'expenses'
 
     id = _db.Column(_db.Integer, primary_key=True)
-    timestamp = _db.Column(
-        _db.DateTime(timezone=True),
+    date = _db.Column(
+        _db.Date(),
         nullable=False,
-        default=lambda: datetime.now(pytz.utc),
+        default=lambda: date.today()
     )
     user_id = _db.Column(_db.Integer, _db.ForeignKey(User.id), nullable=False)
     user = _db.relationship(User, backref=_db.backref('expenses'), lazy=True)
