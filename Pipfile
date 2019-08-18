@@ -8,10 +8,9 @@ Flask = "*"
 Flask-SQLAlchemy = "*"
 SQLAlchemy = "*"
 pytz = "*"
-flask-wtf = "*"
-flask-login = "*"
+Flask-WTF = "*"
+Flask-Login = "*"
 is-safe-url = "*"
-uwsgi = "*"
 
 [dev-packages]
 ipython = "*"

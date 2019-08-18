@@ -1,0 +1,18 @@
+[uwsgi]
+strict = true
+
+gid = <group name>
+uid = <user name>
+
+thunder-lock = true
+enable-threads = true
+
+virtualenv = </path/to/virtualenv>
+chdir = </path/to/checkout>
+
+http = :8080
+master = true
+wsgi-file = haushaltsgeld/wsgi.py
+touch-reload = %(wsgi-file)
+
+env = SECRET_KEY=<replace me!!>
