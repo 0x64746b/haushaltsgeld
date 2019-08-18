@@ -1,7 +1,10 @@
 # coding: utf-8
 
+from datetime import date
+
 from flask_wtf import FlaskForm
 from wtforms import DecimalField, SelectField, SubmitField
+from wtforms_components import DateRange
 from wtforms.fields.html5 import DateField
 from wtforms.validators import InputRequired
 from wtforms.widgets.html5 import NumberInput
@@ -22,6 +25,6 @@ class ExpenseForm(FlaskForm):
     )
     date= DateField(
         'Date',
-        validators=[InputRequired()],
+        validators=[InputRequired(), DateRange(max=date.today)],
     )
     submit = SubmitField('Record')

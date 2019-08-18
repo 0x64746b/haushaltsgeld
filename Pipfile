@@ -11,6 +11,7 @@ pytz = "*"
 Flask-WTF = "*"
 Flask-Login = "*"
 is-safe-url = "*"
+wtforms-components = "*"
 
 [dev-packages]
 ipython = "*"
