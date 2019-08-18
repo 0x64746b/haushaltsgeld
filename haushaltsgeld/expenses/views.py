@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 
 from . import expenses
@@ -29,6 +29,11 @@ def add_expense():
 @login_required
 def edit_expense(id):
     expense = Expense.query.get(id)
+
+    if current_user != expense.user:
+        flash("You can only edit entries that belong to you", category="danger")
+        return redirect(url_for('expenses.list_expenses'))
+
     form = ExpenseForm(obj=expense)
 
     if form.validate_on_submit():
