@@ -26,5 +26,6 @@ class ExpenseForm(FlaskForm):
     date= DateField(
         'Date',
         validators=[InputRequired(), DateRange(max=date.today)],
+        default=date.today(),
     )
     submit = SubmitField('Record')

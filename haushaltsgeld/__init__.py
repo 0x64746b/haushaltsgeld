@@ -1,5 +1,7 @@
 # coding: utf-8
 
+from datetime import date
+
 from flask import Flask
 
 
@@ -23,5 +25,7 @@ def create_app():
 
     from .expenses.views import expenses
     app.register_blueprint(expenses)
+
+    app.jinja_env.globals.update(today=date.today)
 
     return app

@@ -27,7 +27,7 @@ def add_expense():
         _db.session.commit()
         return redirect(url_for('expenses.list_expenses'))
 
-    return render_template('add.html', form=form, today=date.today())
+    return render_template('add.html', form=form)
 
 
 @expenses.route('/list')
