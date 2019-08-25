@@ -49,3 +49,8 @@ def edit_expense(id):
 @login_required
 def list_expenses():
     return render_template('list.html', expenses=Expense.query.all())
+
+
+@expenses.route('/service-worker.js')
+def serve_service_worker():
+    return expenses.send_static_file('js/service-worker.js')
