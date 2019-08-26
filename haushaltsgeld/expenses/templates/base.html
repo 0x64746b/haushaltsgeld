@@ -92,7 +92,7 @@
     </div>
 
     <main role="main" class="container">
-      <div class="main-content">
+      <div id="main-content">
         {% block body %}
         {% endblock %}
       </div>
@@ -101,6 +101,11 @@
     <script src="/expenses/static/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="/expenses/static/js/jquery-slim.min.js"><\/script>')</script>
     <script src="/expenses/static/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="/expenses/static/js/vue.js"></script>
+    <script src="/expenses/static/js/components/editor.js"></script>
+    <script>
+      var vm = new Vue({el: '#main-content'})
+    </script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {

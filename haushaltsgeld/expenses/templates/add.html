@@ -3,38 +3,5 @@
 
 {% block body %}
 <h1>Add an expense</h1>
-<form method="post">
-  <div class="form-group" style="position: relative;">
-    {{ form.amount.label }}
-    {{ form.amount(**{'class':'form-control' if not form.amount.errors else 'form-control is-invalid', 'aria-describedby': 'amountHelp', 'placeholder': '15.98'}) }}
-    <ul class="invalid-tooltip" style="padding-left: 1.3rem;">
-      {% for error in form.amount.errors %}
-      <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-    <small id="amountHelp" class="form-text text-muted">The amount of money you spent</small>
-  </div>
-  <div class="form-group" style="position: relative;">
-    {{ form.store.label }}
-    {{ form.store(**{'class': 'form-control' if not form.store.errors else 'form-control is-invalid', 'aria-describedby': 'storeHelp'}) }}
-    <ul class="invalid-tooltip" style="padding-left: 1.3rem;">
-      {% for error in form.store.errors %}
-      <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-    <small id="storeHelp" class="form-text text-muted">The grocery you shopped at</small>
-  </div>
-  <div class="form-group" style="position: relative;">
-    {{ form.date.label }}
-    {{ form.date(**{'class': 'form-control' if not form.date.errors else 'form-control is-invalid', 'aria-describedby': 'dateHelp', 'max': today()}) }}
-    <ul class="invalid-tooltip" style="padding-left: 1.3rem;">
-      {% for error in form.date.errors %}
-      <li>{{ error }}</li>
-      {% endfor %}
-    </ul>
-    <small id="dateHelp" class="form-text text-muted">The day you spent the money</small>
-  </div>
-  {{ form.csrf_token }}
-  {{ form.submit(class='btn btn-primary') }}
-</form>
+<expense-editor ref="editor"></expense-editor>
 {% endblock %}
