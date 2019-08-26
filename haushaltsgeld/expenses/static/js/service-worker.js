@@ -2,7 +2,7 @@ var CACHE = 'network-or-cache';
 
 self.addEventListener('install', function(event) {
   console.log('The service worker is being installed.');
-  event.waitUntil(precache());
+  event.waitUntil(cacheAppShell());
 });
 
 self.addEventListener('fetch', function(event) {
@@ -12,7 +12,7 @@ self.addEventListener('fetch', function(event) {
   }));
 });
 
-function precache() {
+function cacheAppShell() {
   return caches.open(CACHE).then((cache) => {
     return cache.addAll([
       '/',
