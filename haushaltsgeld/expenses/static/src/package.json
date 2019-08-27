@@ -6,7 +6,9 @@
   "dependencies": {
     "shortid": "^2.2.14"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "webpack": "^4.39.3"
+  },
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
