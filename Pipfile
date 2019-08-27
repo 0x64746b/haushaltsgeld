@@ -15,6 +15,7 @@ wtforms-components = "*"
 
 [dev-packages]
 ipython = "*"
+pylint = "<2.0.0"
 
 [requires]
 python_version = "3.7"

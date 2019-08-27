@@ -12,6 +12,13 @@ self.addEventListener('fetch', function(event) {
   }));
 });
 
+self.addEventListener('sync', function(event) {
+  console.log('Handling sync event');
+  if (event.tag == 'expenseRecorded') {
+    console.log(`Detected request to record expense ${event.data}`)
+  }
+});
+
 function cacheAppShell() {
   return caches.open(CACHE).then((cache) => {
     return cache.addAll([
