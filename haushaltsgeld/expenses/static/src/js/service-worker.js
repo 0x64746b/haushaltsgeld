@@ -2,31 +2,31 @@ import { fetchExpense } from './client-db';
 
 const CACHE = 'haushaltsgeld';
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', event => {
   console.log('The service worker is being installed.');
   event.waitUntil(cacheAppShell());
 });
 
-self.addEventListener('fetch', function(event) {
+self.addEventListener('fetch', event => {
   console.log('The service worker is serving the asset.');
-  event.respondWith(fromNetwork(event.request, 400).catch(function () {
+  event.respondWith(fromNetwork(event.request, 400).catch(_ => {
     return fromCache(event.request);
   }));
 });
 
-self.addEventListener('sync', function(event) {
+self.addEventListener('sync', event => {
   console.log('Preparing to sync...');
   let [eventType, expenseId] = event.tag.split(/-(.+)/);
   if (eventType === 'expenseStored') {
     console.log(` Processing request to sync expense '${expenseId}'`);
-    fetchExpense(expenseId).then(function(expense) {
+    fetchExpense(expenseId).then(expense => {
       console.log(` Retrieved expense ${expense.expenseId}`);
     });
   }
 });
 
 function cacheAppShell() {
-  return caches.open(CACHE).then((cache) => {
+  return caches.open(CACHE).then(cache => {
     return cache.addAll([
       '/',
       '/expenses/static/dist/css/base.css',
@@ -38,15 +38,15 @@ function cacheAppShell() {
       '/static/imgs/hawk.png',
       '/static/imgs/icons/favicon.ico',
     ]);
-  }).catch((error) => {
+  }).catch(error => {
     console.log('Failed to populate cache with app shell:', error)
   });
 }
 
 function fromNetwork(request, timeout) {
-  return new Promise(function (fulfill, reject) {
+  return new Promise((fulfill, reject) => {
     var timeoutId = setTimeout(reject, timeout);
-    fetch(request).then(function (response) {
+    fetch(request).then(response => {
       clearTimeout(timeoutId);
       fulfill(response);
     }, reject);
@@ -54,8 +54,8 @@ function fromNetwork(request, timeout) {
 }
 
 function fromCache(request) {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
+  return caches.open(CACHE).then(cache => {
+    return cache.match(request).then(matching => {
       return matching || Promise.reject('no-match');
     });
   });
