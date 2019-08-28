@@ -1,6 +1,9 @@
 import shortid from 'shortid';
 import { openDB, deleteDB, wrap, unwrap } from 'idb';
 
+var DATABASE = 'haushaltsgeld';
+var EXPENSE_STORE = 'expenses';
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.ready.then(function(registration) {
     $('#submit').on('click', event => {
@@ -30,20 +33,23 @@ function expenseFromForm(form) {
   return data;
 }
 
-function storeExpense(expense) {
-  var dbPromise = openDB(
-    'haushaltsgeld',
+async function storeExpense(expense) {
+  const db = await openDB(
+    DATABASE,
     1,
-    function(upgradeDb) {
-      switch (upgradeDb.oldVersion) {
-        case 0:
-          // a placeholder case so that the switch block will
-          // execute when the database is first created
-          // (oldVersion is 0)
-        case 1:
-          console.log('Creating the expenses object store');
-          upgradeDb.createObjectStore('expenses', {keyPath: 'expenseId'});
+    {
+      upgrade(db, oldVersion, newVersion, transaction) {
+        console.log(`Upgrading DB from v${oldVersion} to v${newVersion}`);
+        console.log('Creating the expenses object store');
+        db.createObjectStore(EXPENSE_STORE, {keyPath: 'expenseId'});
+      },
+      blocked() {
+        console.log('There are older versions of the database open on the origin, so this version cannot open')
+      },
+      blocking() {
+        console.log('This connection is blocking a future version of the database from opening')
       }
     }
   );
+  await db.put(EXPENSE_STORE, expense);
 }
