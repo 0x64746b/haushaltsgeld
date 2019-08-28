@@ -14,8 +14,9 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('sync', function(event) {
   console.log('Handling sync event');
-  if (event.tag == 'expenseRecorded') {
-    console.log(`Detected request to record expense ${event.data}`)
+  let [eventType, expenseId] = event.tag.split('-', 2);
+  if (eventType === 'expenseStored') {
+    console.log(`Received request to upstream expense '${expenseId}'`);
   }
 });
 
@@ -23,11 +24,11 @@ function cacheAppShell() {
   return caches.open(CACHE).then((cache) => {
     return cache.addAll([
       '/',
-      '/expenses/static/css/base.css',
-      '/expenses/static/css/bootstrap.min.css',
-      '/expenses/static/imgs/open-iconic/svg/pencil.svg',
-      '/expenses/static/js/bootstrap.bundle.min.js',
-      '/expenses/static/js/jquery-3.3.1.slim.min.js',
+      '/expenses/static/dist/css/base.css',
+      '/expenses/static/dist/css/bootstrap.min.css',
+      '/expenses/static/dist/imgs/open-iconic/svg/pencil.svg',
+      '/expenses/static/dist/js/bootstrap.bundle.min.js',
+      '/expenses/static/dist/js/jquery-3.3.1.slim.min.js',
       '/list',
       '/static/imgs/hawk.png',
       '/static/imgs/icons/favicon.ico',

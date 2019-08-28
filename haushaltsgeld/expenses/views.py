@@ -53,4 +53,4 @@ def list_expenses():
 
 @expenses.route('/service-worker.js')
 def serve_service_worker():
-    return expenses.send_static_file('js/service-worker.js')
+    return expenses.send_static_file('dist/js/service-worker.js')

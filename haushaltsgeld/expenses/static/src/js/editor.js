@@ -1,22 +1,23 @@
 import shortid from 'shortid';
+import { openDB, deleteDB, wrap, unwrap } from 'idb';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.ready.then(function(registration) {
     $('#submit').on('click', event => {
         event.preventDefault();
-        let expense = formToObject($('#expenseEditor'));
-        console.log('expense:', expense);
-        return registration.sync.register('expenseRecorded')
+        let expense = expenseFromForm($('#expenseEditor'));
+        storeExpense(expense);
+        return registration.sync.register(`expenseStored-${expense.expenseId}`)
         .then(
-          console.log('Sent sync event for new expense')
+          console.log('Registered sync event for new expense')
         ).catch(error => {
-          console.log(`Failed to send sync event for new expense: ${error}`)
+          console.log(`Failed to register sync event for new expense: ${error}`)
         })
     })
   });
 }
 
-function formToObject(form) {
+function expenseFromForm(form) {
   let data = [].reduce.call(
     form.serializeArray(), 
     (result, input) => { 
@@ -30,16 +31,19 @@ function formToObject(form) {
 }
 
 function storeExpense(expense) {
-  var db;
-  var request = window.indexedDB.open('Haushaltsgeld', 1);
-  request.onupgradeneeded = function(event) {
-    db = event.target.result;
-
-  };
-  request.onsuccess = function(event) {
-    db = event.target.result;
-  };
-  request.onerror = function(event) {
-    console.log(`Failed to open IndexedDB to store expense: ${event.target.errorCode}`);
-  };
+  var dbPromise = openDB(
+    'haushaltsgeld',
+    1,
+    function(upgradeDb) {
+      switch (upgradeDb.oldVersion) {
+        case 0:
+          // a placeholder case so that the switch block will
+          // execute when the database is first created
+          // (oldVersion is 0)
+        case 1:
+          console.log('Creating the expenses object store');
+          upgradeDb.createObjectStore('expenses', {keyPath: 'expenseId'});
+      }
+    }
+  );
 }

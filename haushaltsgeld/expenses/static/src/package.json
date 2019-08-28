@@ -4,6 +4,7 @@
   "description": "Track expenses",
   "main": "src/editor.js",
   "dependencies": {
+    "idb": "^4.0.4",
     "shortid": "^2.2.14"
   },
   "devDependencies": {
