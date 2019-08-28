@@ -14,7 +14,7 @@ self.addEventListener('fetch', function(event) {
 
 self.addEventListener('sync', function(event) {
   console.log('Handling sync event');
-  let [eventType, expenseId] = event.tag.split('-', 2);
+  let [eventType, expenseId] = event.tag.split(/-(.+)/);
   if (eventType === 'expenseStored') {
     console.log(`Received request to upstream expense '${expenseId}'`);
   }
