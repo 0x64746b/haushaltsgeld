@@ -20,8 +20,8 @@ self.addEventListener('sync', event => {
   if (eventType === 'expenseStored') {
     console.log(` Processing request to sync expense '${expenseId}'`);
     fetchExpense(expenseId).then(expense => {
-      console.log(` Retrieved expense ${expense.expenseId}`);
-    });
+      console.log(` Retrieved expense ${expense}`);
+    }).catch(error => console.log(`Failed to fetch expense with ID '${expenseId}'`));
   }
 });
 
