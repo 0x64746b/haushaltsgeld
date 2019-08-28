@@ -1,4 +1,4 @@
-var CACHE = 'network-or-cache';
+var CACHE = 'haushaltsgeld';
 
 self.addEventListener('install', function(event) {
   console.log('The service worker is being installed.');
