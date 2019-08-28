@@ -1,4 +1,4 @@
-import { getDb } from './client-db';
+import { fetchExpense } from './client-db';
 
 const CACHE = 'haushaltsgeld';
 
@@ -19,6 +19,9 @@ self.addEventListener('sync', function(event) {
   let [eventType, expenseId] = event.tag.split(/-(.+)/);
   if (eventType === 'expenseStored') {
     console.log(` Processing request to sync expense '${expenseId}'`);
+    fetchExpense(expenseId).then(function(expense) {
+      console.log(` Retrieved expense ${expense.expenseId}`);
+    });
   }
 });
 

@@ -1,20 +1,24 @@
 import shortid from 'shortid';
-import { EXPENSE_STORE, getDb } from './client-db';
+import { storeExpense } from './client-db';
 
 if ('serviceWorker' in navigator) {
+  console.log('Waiting for service worker to become ready...')
   navigator.serviceWorker.ready.then(function(registration) {
-    console.log('Wiring click handler on expense editor button to sync events')
+    console.log(' Wiring click handler on expense editor button to sync events')
     $('#submit').on('click', event => {
-        event.preventDefault();
-        const expense = expenseFromForm($('#expenseEditor'));
-        storeExpense(expense);
-        return registration.sync.register(`expenseStored-${expense.expenseId}`)
-        .then(
-          console.log(`Requested sync for new expense ${expense.expenseId}`)
+      event.preventDefault();
+      const expense = expenseFromForm($('#expenseEditor'));
+      storeExpense(expense).then(function() {
+        console.log(`Requesting sync of expense ${expense.expenseId}`);
+        registration.sync.register(`expenseStored-${expense.expenseId}`).then(
+          console.log(` Requested sync for expense ${expense.expenseId}`)
         ).catch(error => {
-          console.log(`Failed to register sync request for new expense ${expense.expenseId}: ${error}`)
+          console.log(` Failed to register sync request for expense ${expense.expenseId}: ${error}`)
         })
+      });
     })
+  }).catch(function(error) {
+    console.log(`Service worker did not become ready: ${error}`);
   });
 }
 
@@ -29,9 +33,4 @@ function expenseFromForm(form) {
   );
   data['expenseId'] = shortid.generate();
   return data;
-}
-
-async function storeExpense(expense) {
-  const db = await getDb();
-  await db.put(EXPENSE_STORE, expense);
 }

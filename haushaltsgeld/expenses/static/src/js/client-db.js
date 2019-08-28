@@ -1,9 +1,9 @@
 import { openDB } from 'idb';
 
 const DATABASE = 'haushaltsgeld';
-export const EXPENSE_STORE = 'expenses';
+const EXPENSE_STORE = 'expenses';
 
-export function getDb() {
+function getDb() {
   return openDB(
     DATABASE,
     1,
@@ -21,4 +21,14 @@ export function getDb() {
       }
     }
   );
+}
+
+export async function storeExpense(expense) {
+  const db = await getDb();
+  db.put(EXPENSE_STORE, expense);
+}
+
+export async function fetchExpense(id) {
+  const db = await getDb();
+  return db.get(EXPENSE_STORE, id);
 }
