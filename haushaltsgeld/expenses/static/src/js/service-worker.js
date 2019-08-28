@@ -1,4 +1,4 @@
-import { fetchExpense } from './client-db';
+import { Expense } from './client-db';
 
 const CACHE = 'haushaltsgeld';
 
@@ -19,9 +19,9 @@ self.addEventListener('sync', event => {
   let [eventType, expenseId] = event.tag.split(/-(.+)/);
   if (eventType === 'expenseStored') {
     console.log(` Processing request to sync expense '${expenseId}'`);
-    fetchExpense(expenseId).then(expense => {
+    Expense.get(expenseId).then(expense => {
       console.log(` Retrieved expense ${expense}`);
-    }).catch(error => console.log(`Failed to fetch expense with ID '${expenseId}'`));
+    }).catch(error => console.log(`Failed to fetch expense with ID '${expenseId}': ${error}`));
   }
 });
 
