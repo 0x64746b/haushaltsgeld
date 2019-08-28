@@ -1,4 +1,6 @@
-var CACHE = 'haushaltsgeld';
+import { getDb } from './client-db';
+
+const CACHE = 'haushaltsgeld';
 
 self.addEventListener('install', function(event) {
   console.log('The service worker is being installed.');
@@ -13,10 +15,10 @@ self.addEventListener('fetch', function(event) {
 });
 
 self.addEventListener('sync', function(event) {
-  console.log('Handling sync event');
+  console.log('Preparing to sync...');
   let [eventType, expenseId] = event.tag.split(/-(.+)/);
   if (eventType === 'expenseStored') {
-    console.log(`Received request to upstream expense '${expenseId}'`);
+    console.log(` Processing request to sync expense '${expenseId}'`);
   }
 });
 

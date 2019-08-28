@@ -1,20 +1,18 @@
 import shortid from 'shortid';
-import { openDB, deleteDB, wrap, unwrap } from 'idb';
-
-var DATABASE = 'haushaltsgeld';
-var EXPENSE_STORE = 'expenses';
+import { EXPENSE_STORE, getDb } from './client-db';
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.ready.then(function(registration) {
+    console.log('Wiring click handler on expense editor button to sync events')
     $('#submit').on('click', event => {
         event.preventDefault();
-        let expense = expenseFromForm($('#expenseEditor'));
+        const expense = expenseFromForm($('#expenseEditor'));
         storeExpense(expense);
         return registration.sync.register(`expenseStored-${expense.expenseId}`)
         .then(
-          console.log('Registered sync event for new expense')
+          console.log(`Requested sync for new expense ${expense.expenseId}`)
         ).catch(error => {
-          console.log(`Failed to register sync event for new expense: ${error}`)
+          console.log(`Failed to register sync request for new expense ${expense.expenseId}: ${error}`)
         })
     })
   });
@@ -34,22 +32,6 @@ function expenseFromForm(form) {
 }
 
 async function storeExpense(expense) {
-  const db = await openDB(
-    DATABASE,
-    1,
-    {
-      upgrade(db, oldVersion, newVersion, transaction) {
-        console.log(`Upgrading DB from v${oldVersion} to v${newVersion}`);
-        console.log('Creating the expenses object store');
-        db.createObjectStore(EXPENSE_STORE, {keyPath: 'expenseId'});
-      },
-      blocked() {
-        console.log('There are older versions of the database open on the origin, so this version cannot open')
-      },
-      blocking() {
-        console.log('This connection is blocking a future version of the database from opening')
-      }
-    }
-  );
+  const db = await getDb();
   await db.put(EXPENSE_STORE, expense);
 }

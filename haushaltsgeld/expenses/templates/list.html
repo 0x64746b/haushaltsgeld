@@ -20,7 +20,7 @@
       <td>{{ expense.amount | round(2) }}</td>
       <td>{{ expense.store | title }}</td>
       <td>{{ expense.user.username }}</td>
-      <td><a href="{{ url_for('expenses.edit_expense', id=expense.id) }}"><img src="/expenses/static/imgs/open-iconic/svg/pencil.svg" alt="edit"/></a></td>
+      <td><a href="{{ url_for('expenses.edit_expense', id=expense.id) }}"><img src="/expenses/static/dist/imgs/open-iconic/svg/pencil.svg" alt="edit"/></a></td>
     </tr>
   {% endfor %}
   </tbody>
