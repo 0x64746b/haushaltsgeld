@@ -25,6 +25,10 @@ def add_expense():
     return render_template('add.html', form=form)
 
 
+@expenses.route('/add', methods=['POST'])
+def add():
+    return f'Simulating recording of expense {request.json} ...'
+
 @expenses.route('/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_expense(id):

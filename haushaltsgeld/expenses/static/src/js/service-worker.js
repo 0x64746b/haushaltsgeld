@@ -21,6 +21,15 @@ self.addEventListener('sync', event => {
     console.log(` Processing request to sync expense '${expenseId}'`);
     Expense.get(expenseId).then(expense => {
       console.log(` Retrieved expense ${expense}`);
+      fetch('/add', {
+        method: 'post',
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(expense)
+      }).then(response => {
+        response.text().then(text => console.log('Submitted expense:', text))
+      })
     }).catch(error => console.log(`Failed to fetch expense with ID '${expenseId}': ${error}`));
   }
 });
