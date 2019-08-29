@@ -1,2 +1,4 @@
 __pycache__
 haushaltsgeld.sqlite
+haushaltsgeld/expenses/static/dist/js/expenses.*.js
+haushaltsgeld/expenses/static/src/node_modules/

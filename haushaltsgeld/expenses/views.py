@@ -25,6 +25,10 @@ def add_expense():
     return render_template('add.html', form=form)
 
 
+@expenses.route('/add', methods=['POST'])
+def add():
+    return f'Simulating recording of expense {request.json} ...'
+
 @expenses.route('/edit/<id>', methods=['GET', 'POST'])
 @login_required
 def edit_expense(id):
@@ -53,4 +57,4 @@ def list_expenses():
 
 @expenses.route('/service-worker.js')
 def serve_service_worker():
-    return expenses.send_static_file('js/service-worker.js')
+    return expenses.send_static_file('dist/js/expenses.service-worker.js')

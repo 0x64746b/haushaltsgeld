@@ -22,7 +22,7 @@
     <link rel="canonical" href="https://haushaltsgeld.execvebin.sh">
 
     <!-- Bootstrap core CSS -->
-    <link href="/expenses/static/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/expenses/static/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
     <style>
@@ -42,7 +42,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="/expenses/static/css/base.css" rel="stylesheet">
+    <link href="/expenses/static/dist/css/base.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -98,9 +98,9 @@
       </div>
     </main><!-- /.container -->
 
-    <script src="/expenses/static/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="/expenses/static/js/jquery-slim.min.js"><\/script>')</script>
-    <script src="/expenses/static/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="/expenses/static/dist/js/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="/expenses/static/dist/js/jquery-slim.min.js"><\/script>')</script>
+    <script src="/expenses/static/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
@@ -109,11 +109,13 @@
           ).then((registration) => {
             console.log('ServiceWorker registration successful with scope', registration.scope);
           }).catch((error) => {
-            console.log('ServiceWorker registration failed:', err);
+            console.log('ServiceWorker registration failed:', error);
           });
         });
       }
     </script>
+    {% block customScripts %}
+    {% endblock %}
 
   </body>
 </html>

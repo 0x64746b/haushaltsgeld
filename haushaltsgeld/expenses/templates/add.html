@@ -3,7 +3,7 @@
 
 {% block body %}
 <h1>Add an expense</h1>
-<form method="post">
+<form id="expenseEditor" method="post">
   <div class="form-group" style="position: relative;">
     {{ form.amount.label }}
     {{ form.amount(**{'class':'form-control' if not form.amount.errors else 'form-control is-invalid', 'aria-describedby': 'amountHelp', 'placeholder': '15.98'}) }}
@@ -37,4 +37,8 @@
   {{ form.csrf_token }}
   {{ form.submit(class='btn btn-primary') }}
 </form>
+{% endblock %}
+
+{% block customScripts %}
+<script src='/expenses/static/dist/js/expenses.editor.js'></script>
 {% endblock %}
